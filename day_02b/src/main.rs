@@ -61,5 +61,5 @@ fn hamming_test_2() {
 fn solution_test() {
     let test_input = "abcde\nfghij\nklmno\npqrst\nfguij\naxcye\nwvxyz";
 
-    assert_eq!("fgij", &solution(test_input))
+    assert_eq!("fgij", &solution(test_input, test_input).unwrap())
 }
