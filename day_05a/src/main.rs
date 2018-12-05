@@ -44,7 +44,6 @@ fn main() {
 mod tests {
     use super::*;
 
-
     #[test]
     fn test_reactions_a_A() {
         assert!(do_polymers_react(&'a', &'A'));
