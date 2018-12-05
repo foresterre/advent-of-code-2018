@@ -1,10 +1,10 @@
-fn do_polymers_react(first: &char, second: &char) -> bool {
+fn do_polymers_react(first: char, second: char) -> bool {
     // reflection: I used to compare a bit more times, first.is_lowercase && !second.is_lowercase
     // || second.is_lowercase && !first.is_lowercase etc.
     // It turned out, so many comparisons weren't necessary.
 
     first != second // e.g. 'a' != 'A'
-    && first.eq_ignore_ascii_case(second) // e.g. lowercase('A') == lowercase('a')
+    && first.eq_ignore_ascii_case(&second) // e.g. lowercase('A') == lowercase('a')
 }
 
 const INPUT: &str = include_str!("../../input/05");
@@ -20,7 +20,7 @@ fn solution(input: &str) -> usize {
     let result = polymers
         .iter()
         .rfold(zero, |mut acc: Vec<char>, &x| match acc.last() {
-            Some(c) if do_polymers_react(&x, c) => {
+            Some(c) if do_polymers_react(x, *c) => {
                 acc.pop();
                 acc
             }
@@ -30,7 +30,7 @@ fn solution(input: &str) -> usize {
             }
         });
 
-    let res = String::from(result.iter().collect::<String>());
+    let res = result.iter().collect::<String>();
     println!("~> {}.", res);
     res.len()
 }
@@ -45,33 +45,38 @@ mod tests {
     use super::*;
 
     #[test]
+    fn alchemical_reduction_part_1() {
+        assert_eq!(9900, solution(INPUT));
+    }
+
+    #[test]
     fn test_reactions_a_A() {
-        assert!(do_polymers_react(&'a', &'A'));
+        assert!(do_polymers_react('a', 'A'));
     }
 
     #[test]
     fn test_reactions_A_a() {
-        assert!(do_polymers_react(&'A', &'a'));
+        assert!(do_polymers_react('A', 'a'));
     }
 
     #[test]
     fn test_reactions_z_Z() {
-        assert!(do_polymers_react(&'Z', &'z'));
+        assert!(do_polymers_react('Z', 'z'));
     }
 
     #[test]
     fn test_reactions_x_Z() {
-        assert!(!do_polymers_react(&'x', &'Z'));
+        assert!(!do_polymers_react('x', 'Z'));
     }
 
     #[test]
     fn test_reactions_a_a() {
-        assert!(!do_polymers_react(&'a', &'a'));
+        assert!(!do_polymers_react('a', 'a'));
     }
 
     #[test]
     fn test_reactions_A_A() {
-        assert!(!do_polymers_react(&'A', &'A'));
+        assert!(!do_polymers_react('A', 'A'));
     }
 
     #[test]

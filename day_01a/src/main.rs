@@ -1,15 +1,19 @@
-#[derive(Debug)]
-enum Errors {}
-
 const INPUT: &str = include_str!("../../input/01");
 
-fn main() -> Result<(), Errors> {
-    let solution = INPUT
-        .lines()
-        .filter_map(|x| x.parse::<i32>().ok())
-        .fold(0, |acc, x| acc + x);
+fn solution(input: &str) -> i32 {
+    input.lines().filter_map(|x| x.parse::<i32>().ok()).sum()
+}
 
-    println!("Solution: {}", solution);
+fn main() {
+    println!("Solution: {}", solution(INPUT));
+}
 
-    Ok(())
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn chronal_calibration_part_1() {
+        assert_eq!(574, solution(INPUT));
+    }
 }

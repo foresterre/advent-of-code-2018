@@ -68,7 +68,7 @@ fn solution(input: &str) -> u32 {
         }
     }
 
-    let values = HashSet::from_iter(fabric.values().into_iter().map(|v| *v));
+    let values = HashSet::from_iter(fabric.values().cloned());
     *values.difference(&overlap).last().unwrap()
 }
 
@@ -76,4 +76,14 @@ fn main() {
     let sol = solution(INPUT);
 
     println!("{:?}", sol);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn no_matter_how_you_slice_it_part_2() {
+        assert_eq!(650, solution(INPUT));
+    }
 }

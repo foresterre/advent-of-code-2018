@@ -1,6 +1,3 @@
-#[derive(Debug)]
-enum Errors {}
-
 const INPUT: &str = include_str!("../../input/02");
 
 // Observation:
@@ -9,9 +6,9 @@ const INPUT: &str = include_str!("../../input/02");
 //
 // If the strings were not evenly size we would have to use
 // the Levenshtein distance instead.
-fn solution(input: &str, input_cpy: &str) -> Option<String> {
+fn solution(input: &str) -> Option<String> {
     for x in input.lines() {
-        for y in input_cpy.lines() {
+        for y in input.lines() {
             let dist = hamming_distance(x, y);
 
             if dist == 1 {
@@ -41,25 +38,33 @@ fn common_letters(this: &str, that: &str) -> String {
         .collect::<String>()
 }
 
-fn main() -> Result<(), Errors> {
-    println!("Solution: {}", solution(INPUT, INPUT).unwrap());
-
-    Ok(())
+fn main() {
+    println!("Solution: {}", solution(INPUT).unwrap());
 }
 
-#[test]
-fn hamming_test_1() {
-    assert_eq!(1, hamming_distance("lalala", "lalbla"))
-}
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-#[test]
-fn hamming_test_2() {
-    assert_eq!(6, hamming_distance("alotofchars", "alotfosrahc"))
-}
+    #[test]
+    fn inventory_management_system_part_2() {
+        assert_eq!("nvosmkcdtdbfhyxsphzgraljq", &solution(INPUT).unwrap());
+    }
 
-#[test]
-fn solution_test() {
-    let test_input = "abcde\nfghij\nklmno\npqrst\nfguij\naxcye\nwvxyz";
+    #[test]
+    fn hamming_test_1() {
+        assert_eq!(1, hamming_distance("lalala", "lalbla"))
+    }
 
-    assert_eq!("fgij", &solution(test_input, test_input).unwrap())
+    #[test]
+    fn hamming_test_2() {
+        assert_eq!(6, hamming_distance("alotofchars", "alotfosrahc"))
+    }
+
+    #[test]
+    fn solution_test() {
+        let test_input = "abcde\nfghij\nklmno\npqrst\nfguij\naxcye\nwvxyz";
+
+        assert_eq!("fgij", &solution(test_input).unwrap())
+    }
 }

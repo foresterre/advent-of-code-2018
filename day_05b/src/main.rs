@@ -1,6 +1,6 @@
-fn do_polymers_react(first: &char, second: &char) -> bool {
-    first.ne(second) // e.g. 'a' != 'A'
-        && first.eq_ignore_ascii_case(second) // e.g. lowercase('A') == lowercase('a')
+fn do_polymers_react(first: char, second: char) -> bool {
+    first != second // e.g. 'a' != 'A'
+        && first.eq_ignore_ascii_case(&second) // e.g. lowercase('A') == lowercase('a')
 }
 
 const INPUT: &str = include_str!("../../input/05");
@@ -49,7 +49,7 @@ fn process_polymer(input: &str) -> usize {
     let result = polymers
         .iter()
         .rfold(zero, |mut acc: Vec<char>, &x| match acc.last() {
-            Some(c) if do_polymers_react(&x, c) => {
+            Some(c) if do_polymers_react(x, *c) => {
                 acc.pop();
                 acc
             }
@@ -71,6 +71,11 @@ mod tests {
     use super::*;
 
     #[test]
+    fn alchemical_reduction_part_2() {
+        assert_eq!(4992, solution(INPUT));
+    }
+
+    #[test]
     fn example_case() {
         let example_input = "dabAcCaCBAcCcaDA";
         assert_eq!(4, solution(example_input));
@@ -78,41 +83,41 @@ mod tests {
 
     #[test]
     fn test_reactions_upper_lower() {
-        assert!(do_polymers_react(&'A', &'a'));
+        assert!(do_polymers_react('A', 'a'));
     }
 
     #[test]
     fn test_reactions_lower_upper() {
-        assert!(do_polymers_react(&'a', &'A'));
+        assert!(do_polymers_react('a', 'A'));
     }
 
     #[test]
     fn test_reactions_lower_lower() {
-        assert!(!do_polymers_react(&'a', &'a'));
+        assert!(!do_polymers_react('a', 'a'));
     }
 
     #[test]
     fn test_reactions_upper_upper() {
-        assert!(!do_polymers_react(&'A', &'A'));
+        assert!(!do_polymers_react('A', 'A'));
     }
 
     #[test]
     fn test_reactions_upper_lower_other() {
-        assert!(!do_polymers_react(&'A', &'x'));
+        assert!(!do_polymers_react('A', 'x'));
     }
 
     #[test]
     fn test_reactions_lower_upper_other() {
-        assert!(!do_polymers_react(&'a', &'X'));
+        assert!(!do_polymers_react('a', 'X'));
     }
 
     #[test]
     fn test_reactions_lower_lower_other() {
-        assert!(!do_polymers_react(&'a', &'x'));
+        assert!(!do_polymers_react('a', 'x'));
     }
 
     #[test]
     fn test_reactions_upper_upper_other() {
-        assert!(!do_polymers_react(&'A', &'X'));
+        assert!(!do_polymers_react('A', 'X'));
     }
 }

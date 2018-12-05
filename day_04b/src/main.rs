@@ -87,9 +87,18 @@ fn main() {
     solution(INPUT);
 }
 
-#[test]
-fn example_given() {
-    let input = "[1518-11-01 00:00] Guard #10 begins shift
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn repose_record_part_2() {
+        assert_eq!(32070, solution(INPUT));
+    }
+
+    #[test]
+    fn example_given() {
+        let input = "[1518-11-01 00:00] Guard #10 begins shift
 [1518-11-01 00:05] falls asleep
 [1518-11-01 00:25] wakes up
 [1518-11-01 00:30] falls asleep
@@ -107,5 +116,6 @@ fn example_given() {
 [1518-11-05 00:45] falls asleep
 [1518-11-05 00:55] wakes up";
 
-    assert_eq!(4455, solution(input));
+        assert_eq!(4455, solution(input));
+    }
 }

@@ -67,3 +67,13 @@ fn main() {
 
     println!("{:?}", sol);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn no_matter_how_you_slice_it_part_1() {
+        assert_eq!(111935, solution(INPUT));
+    }
+}

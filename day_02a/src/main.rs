@@ -1,6 +1,3 @@
-#[derive(Debug)]
-enum Errors {}
-
 const INPUT: &str = include_str!("../../input/02");
 
 // TODO?: refactor this monstrosity
@@ -37,8 +34,16 @@ fn solution(input: &str) -> usize {
     twos * threes
 }
 
-fn main() -> Result<(), Errors> {
+fn main() {
     println!("Solution: {}", solution(INPUT));
+}
 
-    Ok(())
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn inventory_management_system_part_1() {
+        assert_eq!(5390, solution(INPUT));
+    }
 }

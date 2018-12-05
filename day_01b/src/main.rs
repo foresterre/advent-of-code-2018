@@ -28,22 +28,32 @@ fn main() -> Result<(), Errors> {
     Ok(())
 }
 
-#[test]
-fn example_1() {
-    assert_eq!(0, solution("+1\n-1"));
-}
+#[cfg(test)]
+mod tests {
+    use super::*;
 
-#[test]
-fn example_2() {
-    assert_eq!(10, solution("+3\n+3\n+4\n-2\n-4"));
-}
+    #[test]
+    fn chronal_calibration_part_2() {
+        assert_eq!(452, solution(INPUT));
+    }
 
-#[test]
-fn example_3() {
-    assert_eq!(5, solution("-6\n+3\n+8\n+5\n-6"));
-}
+    #[test]
+    fn example_1() {
+        assert_eq!(0, solution("+1\n-1"));
+    }
 
-#[test]
-fn example_4() {
-    assert_eq!(14, solution("+7\n+7\n-2\n-7\n-4"));
+    #[test]
+    fn example_2() {
+        assert_eq!(10, solution("+3\n+3\n+4\n-2\n-4"));
+    }
+
+    #[test]
+    fn example_3() {
+        assert_eq!(5, solution("-6\n+3\n+8\n+5\n-6"));
+    }
+
+    #[test]
+    fn example_4() {
+        assert_eq!(14, solution("+7\n+7\n-2\n-7\n-4"));
+    }
 }

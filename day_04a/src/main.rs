@@ -90,3 +90,13 @@ fn solution(input: &str) -> usize {
 fn main() {
     solution(INPUT);
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn repose_record_part_1() {
+        assert_eq!(115167, solution(INPUT));
+    }
+}
